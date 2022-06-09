@@ -11,12 +11,14 @@ def test_quitter():
     assert not diffs, diffs
 
 
+@pytest.mark.skip("TODO")
 def test_one_and_done():
     game = Game()
     diffs = diff(game.play, path="tests/version_2/one_and_done.sim.txt")
     assert not diffs, diffs
 
 
+@pytest.mark.skip("TODO")
 def test_single_bank():
     game = Game()
     diffs = diff(
@@ -25,6 +27,7 @@ def test_single_bank():
     assert not diffs, diffs
 
 
+@pytest.mark.skip("TODO")
 def test_bank_first_for_two_rounds():
     game = Game()
     diffs = diff(
