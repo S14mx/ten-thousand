@@ -18,3 +18,5 @@ From root directory - run pytest.
 ## Functionality
 
 Only game logic, banker and rolling dice classes in place. Additional functionality Coming Soon!
+
+add .gitignore
