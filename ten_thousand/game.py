@@ -60,6 +60,7 @@ class Game:
                     answer = input("> ")
                     if answer == "q":
                         print(f"Thanks for playing. You earned {banker.balance} points")
+                        banker.clear_balance()
                     else:
                         answer_to_int = tuple(int(dice) for dice in answer)
                         calc_points = calculate(answer_to_int)
@@ -81,6 +82,9 @@ class Game:
                             print(f"*** {roll_str}***")
                             print("Enter dice to keep, or (q)uit:")
                             answer = input("> ")
+                            if answer == "q":
+                                print(f"Thanks for playing. You earned {banker.balance} points")
+                                banker.clear_balance()
 
 
 if __name__ == "__main__":
