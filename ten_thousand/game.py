@@ -57,6 +57,8 @@ class Game:
                 # self.handle_roll(roller)
                 answer = self.__capture_input("> ")
                 self.handle_shelf(answer, banker, calculate, roll)
+                if answer == "r":
+                    self.handle_roll(roller, 5)
                 answer = self.__capture_input("> ")
                 if answer == "b":
                     self.handle_bank(banker)
@@ -66,6 +68,8 @@ class Game:
                     answer = self.__capture_input("> ")
                     self.handle_shelf(answer, banker, calculate, roll)
                     answer = self.__capture_input("> ")
+                # elif answer == "r":
+                #     self.handle_roll(roller, 5)
                     if answer == "b":
                         self.handle_bank(banker)
                         print(f"Starting round {self.round_counter}")
