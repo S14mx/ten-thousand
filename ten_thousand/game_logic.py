@@ -5,7 +5,7 @@ from collections import Counter
 class GameLogic:
 
     @staticmethod
-    def roll_dice(value):
+    def roll_dice(value=6):
         results = []
         for num in range(value):
             result = (random.randrange(1, 6))

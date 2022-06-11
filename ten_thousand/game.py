@@ -24,8 +24,8 @@ class Game:
         print(f"You have {banker.shelved} unbanked points and {len(roll) - len(answer_to_int)} dice remaining")
         print("(r)oll again, (b)ank your points or (q)uit:")
 
-    def handle_roll(self, roller):
-        roll = roller(6)
+    def handle_roll(self, roller, num=6):
+        roll = roller(num)
         roll_str = ""
         for dice in roll:
             roll_str += str(dice) + " "
@@ -54,6 +54,7 @@ class Game:
                     roll_str += str(dice) + " "
                 print(f"*** {roll_str}***")
                 print("Enter dice to keep, or (q)uit:")
+                # self.handle_roll(roller)
                 answer = self.__capture_input("> ")
                 self.handle_shelf(answer, banker, calculate, roll)
                 answer = self.__capture_input("> ")
