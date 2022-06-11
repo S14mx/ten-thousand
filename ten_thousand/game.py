@@ -3,13 +3,15 @@ from ten_thousand.game_logic import GameLogic
 from ten_thousand.banker import Banker
 
 
+
 class EndOfGame(Exception):
     pass
 
 
 class Game:
-    def __init__(self, round_counter=1):
+    def __init__(self, round_counter=1, roll_num=6):
         self.round_counter = round_counter
+        self.roll_num = roll_num
 
     def __capture_input(self, text):
         user_response = input(text)
@@ -19,9 +21,10 @@ class Game:
 
     def handle_shelf(self, answer, banker, calculate, roll):
         answer_to_int = tuple(int(dice) for dice in answer)
+        self.roll_num = self.roll_num - len(answer_to_int)
         calc_points = calculate(answer_to_int)
         banker.shelf(calc_points)
-        print(f"You have {banker.shelved} unbanked points and {len(roll) - len(answer_to_int)} dice remaining")
+        print(f"You have {banker.shelved} unbanked points and {self.roll_num} dice remaining")
         print("(r)oll again, (b)ank your points or (q)uit:")
 
     def handle_roll(self, roller, num=6):
@@ -29,6 +32,7 @@ class Game:
         roll_str = ""
         for dice in roll:
             roll_str += str(dice) + " "
+        print(f"Rolling {num} dice...")
         print(f"*** {roll_str}***")
         print("Enter dice to keep, or (q)uit:")
 
@@ -56,26 +60,29 @@ class Game:
                 print("Enter dice to keep, or (q)uit:")
                 # self.handle_roll(roller)
                 answer = self.__capture_input("> ")
+                banker.clear_shelf()
                 self.handle_shelf(answer, banker, calculate, roll)
+                answer = self.__capture_input("> ")
                 if answer == "r":
                     self.handle_roll(roller, 5)
-                answer = self.__capture_input("> ")
+                # answer = self.__capture_input("> ")
+                # self.handle_shelf(answer, banker, calculate, roll)
+                # answer = self.__capture_input("> ")
                 if answer == "b":
-                    self.handle_bank(banker)
-                    print(f"Starting round {self.round_counter}")
-                    print("Rolling 6 dice...")
-                    self.handle_roll(roller)
-                    answer = self.__capture_input("> ")
-                    self.handle_shelf(answer, banker, calculate, roll)
-                    answer = self.__capture_input("> ")
-                # elif answer == "r":
-                #     self.handle_roll(roller, 5)
-                    if answer == "b":
                         self.handle_bank(banker)
                         print(f"Starting round {self.round_counter}")
-                        print("Rolling 6 dice...")
                         self.handle_roll(roller)
                         answer = self.__capture_input("> ")
+                        self.handle_shelf(answer, banker, calculate, roll)
+                        answer = self.__capture_input("> ")
+                # elif answer == "r":
+                #     self.handle_roll(roller, 5)
+                        if answer == "b":
+                            self.handle_bank(banker)
+                            print(f"Starting round {self.round_counter}")
+                            print("Rolling 6 dice...")
+                            self.handle_roll(roller)
+                            answer = self.__capture_input("> ")
 
         except EndOfGame:
             print(f"Thanks for playing. You earned {banker.balance} points")
