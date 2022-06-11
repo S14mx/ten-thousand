@@ -32,7 +32,7 @@ class Game:
         print(f"*** {roll_str}***")
         print("Enter dice to keep, or (q)uit:")
 
-    def handle_bank(self, banker, round_counter):
+    def handle_bank(self, banker):
         print(f"You banked {banker.shelved} points in round {self.round_counter}")
         banker.bank()
         self.round_counter += 1
@@ -58,7 +58,7 @@ class Game:
                 self.handle_shelf(answer, banker, calculate, roll)
                 answer = self.__capture_input("> ")
                 if answer == "b":
-                    self.handle_bank(banker, self.round_counter)
+                    self.handle_bank(banker)
                     print(f"Starting round {self.round_counter}")
                     print("Rolling 6 dice...")
                     self.handle_roll(roller)
@@ -66,7 +66,7 @@ class Game:
                     self.handle_shelf(answer, banker, calculate, roll)
                     answer = self.__capture_input("> ")
                     if answer == "b":
-                        self.handle_bank(banker, self.round_counter)
+                        self.handle_bank(banker)
                         print(f"Starting round {self.round_counter}")
                         print("Rolling 6 dice...")
                         self.handle_roll(roller)
