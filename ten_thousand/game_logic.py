@@ -31,3 +31,14 @@ class GameLogic:
                 score += value * (number_of_occurrences - 2)
 
         return score
+
+    @staticmethod
+    def get_scorers(input):
+        if (1 and 5) in input:
+            return (1, 5)
+        elif 1 in input:
+            return (1,)
+        elif 5 in input:
+            return (5,)
+        else:
+            return ()
