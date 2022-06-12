@@ -1,4 +1,4 @@
-LAB - Class 06
+LAB - Class 08
 
 Project: Dice Ten Thousand
 Authors: Pedro Perez, Ibraheem Ibraheem, Sergii Otryshko, Jacob Amsbury
@@ -17,6 +17,4 @@ From root directory - run pytest.
 
 ## Functionality
 
-Only game logic, banker and rolling dice classes in place. Additional functionality Coming Soon!
-
-add .gitignore
+Game is playable with limited functionality. Can start a game, bank and shelf points, input validation is functional and all combinations work.
