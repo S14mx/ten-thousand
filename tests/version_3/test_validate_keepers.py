@@ -4,7 +4,7 @@ from ten_thousand.game_logic import GameLogic
 pytestmark = [pytest.mark.version_3]
 
 
-@pytest.mark.skip("TODO")
+# @pytest.mark.skip("TODO")
 def test_validate_legal_keepers():
     roll = (1, 2, 3, 4, 5)
     keepers = (5, 1)
@@ -13,7 +13,7 @@ def test_validate_legal_keepers():
     assert actual == expected
 
 
-@pytest.mark.skip("TODO")
+# @pytest.mark.skip("TODO")
 def test_validate_illegal_keepers():
     roll = (1, 2, 3, 4, 5)
     keepers = (1, 1, 1, 1, 1)
@@ -22,7 +22,7 @@ def test_validate_illegal_keepers():
     assert actual == expected
 
 
-@pytest.mark.skip("TODO")
+# @pytest.mark.skip("TODO")
 def test_validate_illegal_overflow():
     roll = (1,)
     keepers = (1, 1, 1, 1, 1, 1)
