@@ -33,12 +33,27 @@ class GameLogic:
         return score
 
     @staticmethod
-    def get_scorers(input):
-        if (1 and 5) in input:
-            return (1, 5)
-        elif 1 in input:
-            return (1,)
-        elif 5 in input:
-            return (5,)
-        else:
-            return ()
+    def get_scorers(roll):
+        roll_points = Counter(roll)
+        if (len(roll_points) == 3 and list(roll_points.values()) == [2, 2, 2]) or (len(roll_points) == 6):
+            return roll
+
+        output = []
+        for dice in roll_points:
+            number_of_occurrences = roll_points[dice]
+            if (dice == 1 or dice == 5) or number_of_occurrences >= 3:
+                output += [dice] * number_of_occurrences
+
+        return tuple(output)
+
+    @staticmethod
+    def validate_keepers(roll, selection):
+        roll_points = Counter(roll)
+        selection_points = Counter(selection)
+        for dice in selection_points:
+            number_of_selected = selection_points[dice]
+            number_in_roll = roll_points[dice]
+
+            if number_of_selected > number_in_roll:
+                return False
+        return True
