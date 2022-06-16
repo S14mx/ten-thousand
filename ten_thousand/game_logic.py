@@ -48,6 +48,9 @@ class GameLogic:
 
     @staticmethod
     def validate_keepers(roll, selection):
+        if len(selection) != len(GameLogic.get_scorers(selection)) or len(GameLogic.get_scorers(selection)) == 0:
+            return False
+
         roll_points = Counter(roll)
         selection_points = Counter(selection)
         for dice in selection_points:
