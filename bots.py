@@ -164,7 +164,7 @@ class YourBot(BaseBot):
             {'dice_left': 1, 'min_points': 400},
             {'dice_left': 2, 'min_points': 550},
             {'dice_left': 3, 'min_points': 650},
-            {'dice_left': 4, 'min_points': 750},
+            {'dice_left': 4, 'min_points': 900},
             {'dice_left': 5, 'min_points': 1800}
         )
 
@@ -182,7 +182,7 @@ class YourBot(BaseBot):
         if len(roll) == len(self.last_roll):
             return self._process_roll(roll)
 
-        if Counter(roll)[1] and Counter(roll)[5] < 4:
+        if Counter(roll)[1] and Counter(roll)[5] < 3:
             roll = tuple(dice for dice in roll if dice != 5)
 
         if Counter(roll)[5] == 2:
@@ -190,12 +190,17 @@ class YourBot(BaseBot):
             new_roll.remove(5)
             roll = tuple(new_roll)
 
-        if len(Counter(roll)) > 1:
-            new_roll = [dice for dice in roll if dice != 2 and dice != 3]
-            return self._process_roll(tuple(new_roll))
+        if Counter(roll)[1] == 2:
+            new_roll = [*roll]
+            new_roll.remove(1)
+            roll = tuple(new_roll)
 
-        if len(Counter(roll)) > 1 and Counter(roll)[4] < 4:
-            new_roll = [dice for dice in roll if dice != 4]
+        if len(Counter(roll)) > 1:
+            new_roll = [dice for dice in roll if dice != 2]
+            roll = tuple(new_roll)
+
+        if len(Counter(roll)) > 1 and Counter(roll)[3] < 4:
+            new_roll = [dice for dice in roll if dice != 3]
             return self._process_roll(tuple(new_roll))
 
         return self._process_roll(roll)
@@ -306,9 +311,9 @@ class YoniBot(BaseBot):
 
 
 if __name__ == "__main__":
-    num_games = 1000
-    NervousNellie.play(num_games)
-    MiddlingMargaret.play(num_games)
-    DaringDarla.play(num_games)
-    MarkBot.play(num_games)
+    num_games = 10000
+    # NervousNellie.play(num_games)
+    # MiddlingMargaret.play(num_games)
+    # DaringDarla.play(num_games)
+    # MarkBot.play(num_games)
     YourBot.play(num_games)
