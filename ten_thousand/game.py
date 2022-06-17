@@ -90,8 +90,8 @@ class Game:
             self.calculate = calculate
             self.banker = banker
 
-            banker.clear_shelf()
-            banker.clear_balance()
+            self.banker.clear_shelf()
+            self.banker.clear_balance()
 
             print("Welcome to Ten Thousand")
             print("(y)es to play or (n)o to decline")
@@ -99,12 +99,12 @@ class Game:
             if answer == 'n':
                 print("OK. Maybe another time")
             else:
-                while True:
+                while self.round_counter <= 20:
                     self.handle_round(self.roll_num)
+                raise EndOfGame
 
         except EndOfGame:
-            print(f"Thanks for playing. You earned {banker.balance} points")
-            banker.clear_balance()
+            print(f"Thanks for playing. You earned {self.banker.balance} points")
 
 
 if __name__ == "__main__":
